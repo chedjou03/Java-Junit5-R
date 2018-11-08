@@ -15,6 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -156,4 +157,49 @@ class StringtTest {
 				}
 				);
 	}
+	
+	@Nested
+	class EmptyStringTest{
+		String str;
+		@BeforeEach
+		void setEmpty()
+		{
+			 str = "";
+		}
+		
+		@Test
+		void lengthisZero()
+		{
+			assertEquals(0,str.length());
+		}
+		
+		@Test
+		void uppercaseisEmpty()
+		{
+			assertEquals("",str.toUpperCase());
+		}
+		
+	}
+	
+	@Nested
+	class notEmptyStringTest{
+		String str;
+		@BeforeEach
+		void setEmpty()
+		{
+			 str = "abcd";
+		}
+		
+		@Test
+		void lengthisZero()
+		{
+			assertEquals(4,str.length());
+		}
+		
+		@Test
+		void uppercaseisEmpty()
+		{
+			assertEquals("ABCD",str.toUpperCase());
+		}
+}
 }
