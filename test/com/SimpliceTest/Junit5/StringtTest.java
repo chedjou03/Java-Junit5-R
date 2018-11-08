@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StringtTest {
 	
@@ -115,12 +117,20 @@ class StringtTest {
 	}
 	
 	@Test
-	void length_greater_than_zere()
+	void length_greater_than_zero()
 	{
 		assertTrue("ABCD".length()>0);
 		assertTrue("ABC".length()>0);
 		assertTrue("ABCDEDF".length()>0);
 		assertTrue("A".length()>0);
+	}
+
+	
+	@ParameterizedTest
+	@ValueSource(strings = {"ABCD","QC","EDCO","DED"})
+	void length_greater_than_zero_using_parametized(String str)
+	{
+		assertTrue(str.length()>0);
 	}
 
 }
