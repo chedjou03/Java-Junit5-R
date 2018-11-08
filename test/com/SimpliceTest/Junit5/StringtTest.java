@@ -1,10 +1,46 @@
 package com.SimpliceTest.Junit5;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 class StringtTest {
+	
+	
+	@BeforeAll //run before all test method
+	static void beforeAll() 
+	{
+		System.out.println("Initialize DB connection  ");
+	}
+	
+	@AfterAll //run after all test method
+	static void afterAll()
+	{
+		System.out.println("closing DB connection  ");
+	}
+	
+	@BeforeEach //run before each test method
+	void beforeEach(TestInfo info)
+	{
+		System.out.println("Initialize Test Data for : "+info.getDisplayName());
+	}
+	
+	@AfterEach//run after each test method
+	void afterEach(TestInfo info)
+	{
+		System.out.println("clean up data Test Data for:  "+info.getDisplayName());
+	}
 
 	@Test
 	void testSringLenght() {
@@ -63,6 +99,28 @@ class StringtTest {
 		String [] expectedResult = new String [] {"abc","def","ghi"};
 		
 		assertArrayEquals(expectedResult,actualResult);
+	}
+	
+	@Test
+	@DisplayName("when length is null throws and exception")
+	void testSringLenght_exception() {
+		String str = null;
+		
+		//write our asserstion
+		assertThrows(NullPointerException.class,
+				    ()->{
+				    	str.length();
+				    }
+				);	
+	}
+	
+	@Test
+	void length_greater_than_zere()
+	{
+		assertTrue("ABCD".length()>0);
+		assertTrue("ABC".length()>0);
+		assertTrue("ABCDEDF".length()>0);
+		assertTrue("A".length()>0);
 	}
 
 }
