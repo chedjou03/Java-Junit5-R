@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.Duration;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -127,17 +130,30 @@ class StringtTest {
 	}
 
 	
-	@ParameterizedTest
+	@ParameterizedTest 
 	@ValueSource(strings = {"ABCD","QC","EDCO","DED","EDRF"})
 	void length_greater_than_zero_using_parametized(String str)
 	{
 		assertTrue(str.length()>0);
 	}
 
-	@ParameterizedTest
+	@ParameterizedTest (name = "{0} Capitalized is {1}")
 	@CsvSource(value = {"abcd,ABCD","ab, AB","'',''","ac,AC"})
 	void uppserCase(String word, String capitalizedWord)
 	{
 		assertEquals(capitalizedWord,word.toUpperCase());
+	}
+	
+	@Test
+	void performanceTest()
+	{
+		assertTimeout(Duration.ofSeconds(5),
+				()->{
+					for (int i =0; i<=1000;i++)
+					{
+						System.out.println(i);
+					}
+				}
+				);
 	}
 }
